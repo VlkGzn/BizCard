@@ -11,6 +11,11 @@
 <link rel="alternate" hreflang="en" href="https://vlkgzn.github.io/BizCard/en.html">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest-en.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="BizCard">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://vlkgzn.github.io/BizCard/en.html">
 <meta property="og:title" content="Volkan Gözen, Ph.D. — BizCard">
@@ -101,5 +106,10 @@ a:focus-visible{outline:3px solid var(--amber);outline-offset:3px;}
     <p class="qr-tap">or tap the QR code to save</p>
   </section>
 </main>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
+}
+</script>
 </body>
 </html>

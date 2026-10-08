@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Dr. Volkan Gözen — BizCard",
+  "short_name": "BizCard",
+  "description": "Ziraat Mühendisi · Sebze Islahçısı · Veri Analisti — Antalya Batı Akdeniz Tarımsal Araştırma Enstitüsü",
+  "lang": "tr",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F6F1E6",
+  "theme_color": "#F6F1E6",
+  "categories": ["business", "productivity"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
