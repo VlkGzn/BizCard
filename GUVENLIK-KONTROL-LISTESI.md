@@ -50,11 +50,11 @@ Tasarım: `docs/superpowers/specs/2026-10-11-iletisim-formu-design.md`
 ## Deploy sonrası
 
 - [x] Vercel Preview adresinden mesaj gönderildi, Gmail'e geldi (11 Ekim 2026)
-- [ ] GitHub Pages adresinden mesaj gönderildi, Gmail'e geldi
+- [x] GitHub Pages adresinden mesaj gönderildi, Gmail'e geldi (telefondaki PWA, 11 Ekim 2026)
 - [ ] Gmail'de "Yanıtla" ziyaretçinin adresine gidiyor
 - [x] Arka arkaya isteklerde `429` + `Retry-After` alındı (11 Ekim 2026, canlı)
 - [x] Geçersiz e-posta ile `400` ve alan hatası döndü
 - [x] Rıza işaretsiz istek `400` döndü
 - [x] `GET /api/contact` → `405`
 - [x] Güvenlik başlıkları `curl -sI` ile görüldü
-- [ ] Telefondaki PWA'dan form denendi
+- [x] Telefondaki PWA'dan form denendi, mesaj geldi (bizcard-v3, 11 Ekim 2026)
