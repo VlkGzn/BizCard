@@ -1,6 +1,6 @@
 // BizCard service worker: çevrimdışı çalışma için tüm dosyaları önbelleğe alır.
 // Dosyaları güncellediğinizde VERSION değerini artırın.
-const VERSION = 'bizcard-v5';
+const VERSION = 'bizcard-v6';
 const ASSETS = [
   './',
   'index.html',

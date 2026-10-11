@@ -97,7 +97,7 @@ test('valid POST sends one email and returns 200 with CORS header', async () => 
 });
 
 test('allowed origins list matches the spec', () => {
-  assert.deepEqual(ALLOWED_ORIGINS, ['https://vlkgzn.github.io', 'https://volkan-gozen-bizcard.vercel.app', 'https://www.volkangozen.com', 'https://volkangozen.com']);
+  assert.deepEqual(ALLOWED_ORIGINS, ['https://vlkgzn.github.io', 'https://volkan-gozen-bizcard.vercel.app', 'https://www.volkangozen.com', 'https://volkangozen.com', 'https://kart.volkangozen.com']);
 });
 
 test('same-origin preview host is allowed', async () => {

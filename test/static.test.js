@@ -85,9 +85,9 @@ test('card pages link to the contact and privacy pages', () => {
   assert.match(read('en.html'), /<a href="privacy\.html">Privacy<\/a>/);
 });
 
-test('service worker caches every new file, skips /api/ and is bumped to v5', () => {
+test('service worker caches every new file, skips /api/ and is bumped to v6', () => {
   const sw = read('sw.js');
-  assert.match(sw, /const VERSION = 'bizcard-v5';/);
+  assert.match(sw, /const VERSION = 'bizcard-v6';/);
   for (const file of ['app.js', 'form.js', 'pages.css', 'iletisim.html', 'contact.html', 'gizlilik.html', 'privacy.html']) {
     assert.match(sw, new RegExp(`'${file.replace('.', '\\.')}'`), `sw.js caches ${file}`);
     assert.ok(fs.existsSync(path.join(root, file)), `${file} exists`);
@@ -122,8 +122,8 @@ test('no .DS_Store file is tracked', () => {
   assert.ok(!/\.DS_Store/.test(tracked), 'a .DS_Store file is tracked');
 });
 
-test('canonical, hreflang and og URLs point to www.volkangozen.com', () => {
-  const base = 'https://www.volkangozen.com';
+test('canonical, hreflang and og URLs point to kart.volkangozen.com', () => {
+  const base = 'https://kart.volkangozen.com';
   for (const [file, self, img] of [['index.html', '/', 'og-image.png'], ['en.html', '/en.html', 'og-image-en.png']]) {
     const html = read(file);
     assert.ok(html.includes(`<link rel="canonical" href="${base}${self}">`), file);

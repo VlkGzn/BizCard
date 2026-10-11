@@ -4,7 +4,7 @@ Dr. Volkan Gözen, Antalya Batı Akdeniz Tarımsal Araştırma Enstitüsü'nde �
 
 Tanışmak ya da bir proje konuşmak isterseniz kartvizitteki QR kodu taratın. Bilgileri tek dokunuşla rehberinize kaydedebilirsiniz.
 
-**Kartvizit:** https://www.volkangozen.com/ · [English](https://www.volkangozen.com/en.html) (yedek: https://volkan-gozen-bizcard.vercel.app/ ve https://vlkgzn.github.io/BizCard/)
+**Kartvizit:** https://kart.volkangozen.com/ · [English](https://kart.volkangozen.com/en.html) (yedek: https://volkan-gozen-bizcard.vercel.app/ ve https://vlkgzn.github.io/BizCard/)
 
 ## Telefona uygulama olarak yükleme
 
