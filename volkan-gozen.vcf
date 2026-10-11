@@ -9,12 +9,14 @@ TITLE;CHARSET=UTF-8:Ziraat Mühendisi · Sebze Islahçısı · Veri Analist
 TEL;TYPE=CELL,VOICE:+905327389673
 EMAIL;TYPE=INTERNET,WORK:volkan.gozen@tarimorman.gov.tr
 EMAIL;TYPE=INTERNET,HOME:vgozen44@gmail.com
-item1.URL:https://vlkgzn.github.io/dijital-kartvizit/
-item1.X-ABLabel:Dijital Kartvizit
-item2.URL:https://www.linkedin.com/in/volkan-gozen
-item2.X-ABLabel:LinkedIn
-item3.URL:https://wa.me/905327389673
-item3.X-ABLabel:WhatsApp
+item1.URL:https://www.volkangozen.com/
+item1.X-ABLabel:Web Sitesi
+item2.URL:https://vlkgzn.github.io/dijital-kartvizit/
+item2.X-ABLabel:Dijital Kartvizit
+item3.URL:https://www.linkedin.com/in/volkan-gozen
+item3.X-ABLabel:LinkedIn
+item4.URL:https://wa.me/905327389673
+item4.X-ABLabel:WhatsApp
 X-SOCIALPROFILE;TYPE=whatsapp:https://wa.me/905327389673
 X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/volkan-gozen
 ADR;CHARSET=UTF-8;TYPE=WORK:;;;Antalya;;;Türkiye

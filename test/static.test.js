@@ -85,9 +85,9 @@ test('card pages link to the contact and privacy pages', () => {
   assert.match(read('en.html'), /<a href="privacy\.html">Privacy<\/a>/);
 });
 
-test('service worker caches every new file, skips /api/ and is bumped to v4', () => {
+test('service worker caches every new file, skips /api/ and is bumped to v5', () => {
   const sw = read('sw.js');
-  assert.match(sw, /const VERSION = 'bizcard-v4';/);
+  assert.match(sw, /const VERSION = 'bizcard-v5';/);
   for (const file of ['app.js', 'form.js', 'pages.css', 'iletisim.html', 'contact.html', 'gizlilik.html', 'privacy.html']) {
     assert.match(sw, new RegExp(`'${file.replace('.', '\\.')}'`), `sw.js caches ${file}`);
     assert.ok(fs.existsSync(path.join(root, file)), `${file} exists`);
@@ -132,5 +132,17 @@ test('canonical, hreflang and og URLs point to www.volkangozen.com', () => {
     assert.ok(html.includes(`<meta property="og:url" content="${base}${self}">`), file);
     assert.ok(html.includes(`<meta property="og:image" content="${base}/${img}">`), file);
     assert.doesNotMatch(html, /vlkgzn\.github\.io\/BizCard/, file);
+  }
+});
+
+test('vCard files list volkangozen.com first and keep the digital card link', () => {
+  for (const [file, site, card] of [
+    ['volkan-gozen.vcf', 'https://www.volkangozen.com/', 'https://vlkgzn.github.io/dijital-kartvizit/'],
+    ['volkan-gozen-en.vcf', 'https://www.volkangozen.com/en.html', 'https://vlkgzn.github.io/dijital-kartvizit/en.html']
+  ]) {
+    const urls = [...read(file).matchAll(/^item(\d)\.URL:(.*)$/gm)].map(m => [m[1], m[2].trim()]);
+    assert.deepEqual(urls[0], ['1', site], file);
+    assert.ok(urls.some(([, u]) => u === card), file);
+    assert.deepEqual(urls.map(([n]) => n), urls.map((_, i) => String(i + 1)), file);
   }
 });
