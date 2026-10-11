@@ -51,7 +51,7 @@ Tasarım: `docs/superpowers/specs/2026-10-11-iletisim-formu-design.md`
 
 - [x] Vercel Preview adresinden mesaj gönderildi, Gmail'e geldi (11 Ekim 2026)
 - [x] GitHub Pages adresinden mesaj gönderildi, Gmail'e geldi (telefondaki PWA, 11 Ekim 2026)
-- [ ] Gmail'de "Yanıtla" ziyaretçinin adresine gidiyor
+- [x] Gmail'de "Yanıtla" ziyaretçinin adresine gidiyor (11 Ekim 2026)
 - [x] Arka arkaya isteklerde `429` + `Retry-After` alındı (11 Ekim 2026, canlı)
 - [x] Geçersiz e-posta ile `400` ve alan hatası döndü
 - [x] Rıza işaretsiz istek `400` döndü
