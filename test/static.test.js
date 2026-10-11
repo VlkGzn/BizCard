@@ -94,3 +94,30 @@ test('service worker caches every new file, skips /api/ and is bumped to v2', ()
   }
   assert.match(sw, /url\.pathname\.startsWith\('\/api\/'\)/);
 });
+
+test('contact forms post and stay disabled until form.js runs', () => {
+  for (const file of ['iletisim.html', 'contact.html']) {
+    const html = read(file);
+    assert.match(html, /<form id="contact-form" method="post" action="#"/, `${file} form uses POST`);
+    assert.match(html, /<button class="btn" type="submit" disabled>/, `${file} button starts disabled`);
+  }
+  assert.match(read('form.js'), /button\.disabled = false;\n\n  function show/, 'form.js enables the button on load');
+});
+
+test('form.js shows the offline message only when the browser is offline', () => {
+  assert.match(read('form.js'), /catch \{\n\s+show\(navigator\.onLine \? text\.msgError : text\.msgOffline, 'error'\);/);
+});
+
+test('consent and privacy texts name every recipient and log', () => {
+  assert.match(read('iletisim.html'), /Vercel Inc\., Resend, Google — ABD/);
+  assert.match(read('contact.html'), /Vercel Inc\., Resend, Google — USA/);
+  assert.match(read('gizlilik.html'), /Resend, gönderilen e-postaların bir kopyasını/);
+  assert.match(read('gizlilik.html'), /erişim kayıtlarında IP adresinizi/);
+  assert.match(read('privacy.html'), /Resend keeps a copy of sent emails/);
+  assert.match(read('privacy.html'), /access logs record your IP address/);
+});
+
+test('no .DS_Store file is tracked', () => {
+  const tracked = require('node:child_process').execSync('git ls-files', { cwd: root, encoding: 'utf8' });
+  assert.ok(!/\.DS_Store/.test(tracked), 'a .DS_Store file is tracked');
+});

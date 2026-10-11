@@ -20,7 +20,7 @@
   </div>
   <h1>Mesaj Gönder</h1>
   <p class="lead">Bir proje konuşmak ya da tanışmak isterseniz yazın. En kısa sürede yanıt veririm.</p>
-  <form id="contact-form" novalidate
+  <form id="contact-form" method="post" action="#" novalidate
         data-msg-sending="Gönderiliyor…"
         data-msg-success="Teşekkürler, mesajınız ulaştı. En kısa sürede yanıt vereceğim."
         data-msg-offline="İnternet bağlantısı yok. Lütfen sonra tekrar deneyin."
@@ -39,9 +39,9 @@
     </div>
     <label class="check">
       <input name="consent" type="checkbox" required>
-      <span><a href="gizlilik.html">Aydınlatma Metni</a>'ni okudum. Mesajımın yanıtlanması için kişisel verilerimin işlenmesine ve bu amaçla yurt dışındaki sunuculara (Vercel Inc., Resend — ABD) aktarılmasına açık rıza veriyorum.</span>
+      <span><a href="gizlilik.html">Aydınlatma Metni</a>'ni okudum. Mesajımın yanıtlanması için kişisel verilerimin işlenmesine ve bu amaçla yurt dışındaki sunuculara (Vercel Inc., Resend, Google — ABD) aktarılmasına açık rıza veriyorum.</span>
     </label>
-    <button class="btn" type="submit">Gönder</button>
+    <button class="btn" type="submit" disabled>Gönder</button>
     <p id="form-status" class="status" role="status" aria-live="polite"></p>
   </form>
   <noscript><p>Form için JavaScript gerekir. Bunun yerine <a href="mailto:vgozen44@gmail.com">vgozen44@gmail.com</a> adresine yazabilirsiniz.</p></noscript>

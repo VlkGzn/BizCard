@@ -9,6 +9,8 @@
   const endpoint = location.hostname === 'vlkgzn.github.io'
     ? 'https://volkan-gozen-bizcard.vercel.app/api/contact'
     : '/api/contact';
+  // Düğme HTML'de kapalı gelir; böylece script yüklenmeden form gönderilemez.
+  button.disabled = false;
 
   function show(message, kind) {
     status.textContent = message;
@@ -49,7 +51,7 @@
         if (field) field.focus();
       }
     } catch {
-      show(text.msgOffline, 'error');
+      show(navigator.onLine ? text.msgError : text.msgOffline, 'error');
     } finally {
       button.disabled = false;
     }

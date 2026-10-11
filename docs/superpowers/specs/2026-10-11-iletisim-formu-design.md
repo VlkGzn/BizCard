@@ -67,7 +67,7 @@ Onay kutusu metni (TR):
 
 > [Aydınlatma Metni](gizlilik.html)'ni okudum. Mesajımın yanıtlanması için
 > kişisel verilerimin işlenmesine ve bu amaçla yurt dışındaki sunuculara
-> (Vercel Inc., Resend — ABD) aktarılmasına açık rıza veriyorum.
+> (Vercel Inc., Resend, Google — ABD) aktarılmasına açık rıza veriyorum.
 
 Davranış:
 
