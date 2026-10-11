@@ -72,4 +72,67 @@ function validate(body) {
   return { ok: true, data };
 }
 
-module.exports = { MESSAGES, createRateLimiter, validate };
+const ALLOWED_ORIGINS = ['https://vlkgzn.github.io', 'https://volkan-gozen-bizcard.vercel.app'];
+const MAX_BODY_BYTES = 10 * 1024;
+
+function isAllowedOrigin(origin, host) {
+  if (!origin) return false;
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  return Boolean(host) && origin === `https://${host}`;
+}
+
+function buildEmail(data, now) {
+  return {
+    subject: `BizCard mesajı: ${data.name}`,
+    replyTo: data.email,
+    text: [
+      `Ad Soyad: ${data.name}`,
+      `E-posta: ${data.email}`,
+      `Sayfa dili: ${data.lang}`,
+      `Açık rıza zamanı: ${new Date(now).toISOString()}`,
+      '',
+      data.message
+    ].join('\n')
+  };
+}
+
+async function handleContact(req, deps) {
+  const { method, origin, host, ip, body } = req;
+  const t = MESSAGES[pickLang(body)];
+  const allowed = isAllowedOrigin(origin, host);
+  const cors = allowed ? { 'Access-Control-Allow-Origin': origin, Vary: 'Origin' } : { Vary: 'Origin' };
+  const reply = (status, payload, extra = {}) => ({ status, headers: { ...cors, ...extra }, body: payload });
+
+  if (method === 'OPTIONS') {
+    if (!allowed) return reply(403, { ok: false, error: t.origin });
+    return reply(204, null, {
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Max-Age': '86400'
+    });
+  }
+  if (method !== 'POST') return reply(405, { ok: false, error: t.method }, { Allow: 'POST, OPTIONS' });
+  if (!allowed) return reply(403, { ok: false, error: t.origin });
+
+  const limit = deps.limiter(ip || 'unknown', deps.now());
+  if (!limit.ok) return reply(429, { ok: false, error: t.rate }, { 'Retry-After': String(limit.retryAfter) });
+
+  const isObject = body && typeof body === 'object' && !Array.isArray(body);
+  if (!isObject || Buffer.byteLength(JSON.stringify(body)) > MAX_BODY_BYTES) {
+    return reply(400, { ok: false, field: null, error: t.body });
+  }
+  if (body.website) return reply(200, { ok: true });
+
+  const result = validate(body);
+  if (!result.ok) return reply(400, { ok: false, field: result.field, error: result.message });
+
+  try {
+    await deps.sendEmail(buildEmail(result.data, deps.now()));
+  } catch (err) {
+    deps.log('contact: send failed:', err && err.message);
+    return reply(502, { ok: false, error: t.send });
+  }
+  return reply(200, { ok: true });
+}
+
+module.exports = { MESSAGES, ALLOWED_ORIGINS, createRateLimiter, validate, buildEmail, handleContact };
