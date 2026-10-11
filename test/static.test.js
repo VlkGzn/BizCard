@@ -77,3 +77,20 @@ test('form.js uses the absolute API only on GitHub Pages', () => {
   assert.match(js, /'https:\/\/volkan-gozen-bizcard\.vercel\.app\/api\/contact'/);
   assert.match(js, /'\/api\/contact'/);
 });
+
+test('card pages link to the contact and privacy pages', () => {
+  assert.match(read('index.html'), /<a class="cta" href="iletisim\.html">Mesaj Gönder<\/a>/);
+  assert.match(read('index.html'), /<a href="gizlilik\.html">Gizlilik<\/a>/);
+  assert.match(read('en.html'), /<a class="cta" href="contact\.html">Send a Message<\/a>/);
+  assert.match(read('en.html'), /<a href="privacy\.html">Privacy<\/a>/);
+});
+
+test('service worker caches every new file, skips /api/ and is bumped to v2', () => {
+  const sw = read('sw.js');
+  assert.match(sw, /const VERSION = 'bizcard-v2';/);
+  for (const file of ['app.js', 'form.js', 'pages.css', 'iletisim.html', 'contact.html', 'gizlilik.html', 'privacy.html']) {
+    assert.match(sw, new RegExp(`'${file.replace('.', '\\.')}'`), `sw.js caches ${file}`);
+    assert.ok(fs.existsSync(path.join(root, file)), `${file} exists`);
+  }
+  assert.match(sw, /url\.pathname\.startsWith\('\/api\/'\)/);
+});

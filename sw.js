@@ -1,10 +1,17 @@
 // BizCard service worker: çevrimdışı çalışma için tüm dosyaları önbelleğe alır.
 // Dosyaları güncellediğinizde VERSION değerini artırın.
-const VERSION = 'bizcard-v1';
+const VERSION = 'bizcard-v2';
 const ASSETS = [
   './',
   'index.html',
   'en.html',
+  'iletisim.html',
+  'contact.html',
+  'gizlilik.html',
+  'privacy.html',
+  'app.js',
+  'form.js',
+  'pages.css',
   'logo.svg',
   'logo.png',
   'apple-touch-icon.png',
@@ -32,7 +39,10 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   const req = event.request;
-  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  const url = new URL(req.url);
+  if (req.method !== 'GET' || url.origin !== location.origin) return;
+  // Form API'si asla önbelleğe alınmaz.
+  if (url.pathname.startsWith('/api/')) return;
 
   // Sayfalar: önce ağ (güncel içerik), çevrimdışıysa önbellek.
   if (req.mode === 'navigate') {
