@@ -72,7 +72,7 @@ function validate(body) {
   return { ok: true, data };
 }
 
-const ALLOWED_ORIGINS = ['https://vlkgzn.github.io', 'https://volkan-gozen-bizcard.vercel.app'];
+const ALLOWED_ORIGINS = ['https://vlkgzn.github.io', 'https://volkan-gozen-bizcard.vercel.app', 'https://www.volkangozen.com', 'https://volkangozen.com'];
 const MAX_BODY_BYTES = 10 * 1024;
 
 function isAllowedOrigin(origin, host) {
