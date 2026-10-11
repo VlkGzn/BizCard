@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F6F1E6">
+<title>Send a Message — Volkan Gözen, Ph.D.</title>
+<meta name="description" content="Send a message to Volkan Gözen, Ph.D.">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="stylesheet" href="pages.css">
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <a class="back" href="en.html">← Business card</a>
+    <nav class="lang" aria-label="Language">
+      <a href="iletisim.html" lang="tr" hreflang="tr">TR</a>
+      <a href="contact.html" lang="en" hreflang="en" aria-current="page">EN</a>
+    </nav>
+  </div>
+  <h1>Send a Message</h1>
+  <p class="lead">Want to discuss a project or just say hello? Write to me and I'll reply as soon as I can.</p>
+  <form id="contact-form" novalidate
+        data-msg-sending="Sending…"
+        data-msg-success="Thank you, your message has arrived. I'll reply soon."
+        data-msg-offline="No internet connection. Please try again later."
+        data-msg-error="Your message could not be sent. Please try again later.">
+    <label class="field"><span>Full name</span>
+      <input name="name" type="text" autocomplete="name" required minlength="2" maxlength="100">
+    </label>
+    <label class="field"><span>Email</span>
+      <input name="email" type="email" autocomplete="email" required maxlength="200">
+    </label>
+    <label class="field"><span>Message</span>
+      <textarea name="message" required minlength="10" maxlength="2000"></textarea>
+    </label>
+    <div class="hp" aria-hidden="true">
+      <label>Website <input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+    </div>
+    <label class="check">
+      <input name="consent" type="checkbox" required>
+      <span>I have read the <a href="privacy.html">Privacy Notice</a>. I give explicit consent to the processing of my personal data to answer my message, and to its transfer for this purpose to servers abroad (Vercel Inc., Resend — USA).</span>
+    </label>
+    <button class="btn" type="submit">Send</button>
+    <p id="form-status" class="status" role="status" aria-live="polite"></p>
+  </form>
+  <noscript><p>This form needs JavaScript. You can write to <a href="mailto:vgozen44@gmail.com">vgozen44@gmail.com</a> instead.</p></noscript>
+</main>
+<script src="app.js" defer></script>
+<script src="form.js" defer></script>
+</body>
+</html>

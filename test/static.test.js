@@ -54,3 +54,26 @@ test('privacy pages exist, cross-link and name the controller and processors', (
     assert.match(html, /<link rel="stylesheet" href="pages\.css">/);
   }
 });
+
+test('contact pages have the form, consent and privacy link', () => {
+  for (const [file, privacy] of [['iletisim.html', 'gizlilik.html'], ['contact.html', 'privacy.html']]) {
+    const html = read(file);
+    assert.match(html, /<form id="contact-form"/, file);
+    for (const name of ['name', 'email', 'message', 'website', 'consent']) {
+      assert.match(html, new RegExp(`name="${name}"`), `${file} has ${name}`);
+    }
+    assert.match(html, /name="consent"[^>]*required/, `${file} consent is required`);
+    assert.match(html, new RegExp(`href="${privacy}"`), `${file} links ${privacy}`);
+    assert.match(html, /<script src="form\.js" defer><\/script>/, file);
+    for (const key of ['sending', 'success', 'offline', 'error']) {
+      assert.match(html, new RegExp(`data-msg-${key}="[^"]+"`), `${file} has data-msg-${key}`);
+    }
+  }
+});
+
+test('form.js uses the absolute API only on GitHub Pages', () => {
+  const js = read('form.js');
+  assert.match(js, /location\.hostname === 'vlkgzn\.github\.io'/);
+  assert.match(js, /'https:\/\/volkan-gozen-bizcard\.vercel\.app\/api\/contact'/);
+  assert.match(js, /'\/api\/contact'/);
+});
