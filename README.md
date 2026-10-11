@@ -20,7 +20,27 @@ BizCard bir PWA (Progressive Web App). Android'de Chrome ile siteyi açın, çı
 | `sw.js` | Çevrimdışı çalışmayı sağlayan service worker |
 | `icons/` | Android uygulama ikonları |
 | `logo.svg`, `logo.png`, `apple-touch-icon.png`, `og-image*.png` | Logo ve paylaşım görselleri |
+| `iletisim.html`, `contact.html` | İletişim formu (TR / EN) |
+| `gizlilik.html`, `privacy.html` | KVKK Aydınlatma Metni / Privacy Notice |
+| `pages.css` | Alt sayfaların ortak stili |
+| `app.js`, `form.js` | Service worker kaydı ve form gönderimi |
+| `api/contact.js`, `api/_lib/` | Vercel'de çalışan form sunucusu (Resend ile e-posta) |
+| `vercel.json` | Güvenlik başlıkları |
+| `test/` | Testler: `node --test test/*.test.js` |
 
 ## Güncelleme
 
 Site GitHub Pages ile `main` dalından yayınlanır. Bir dosyayı değiştirdiğinizde `sw.js` içindeki `VERSION` değerini artırın (`bizcard-v1` → `bizcard-v2`), böylece yüklü uygulamalar yeni sürümü alır.
+
+## İletişim formu
+
+Form mesajları Vercel'deki `api/contact.js` üzerinden Resend ile e-posta olarak gelir. GitHub Pages sunucu kodu çalıştıramadığı için oradaki form da Vercel adresine gönderir.
+
+Vercel → Settings → Environment Variables (Production ve Preview):
+
+| Ad | Değer |
+| --- | --- |
+| `RESEND_API_KEY` | Resend panelinden alınan anahtar |
+| `CONTACT_TO` | Mesajların geleceği e-posta |
+
+Yerel deneme için `.env.example` dosyasını `.env.local` olarak kopyalayın (commit edilmez).

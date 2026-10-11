@@ -74,6 +74,10 @@ a:focus-visible{outline:3px solid var(--amber);outline-offset:3px;}
 @media (max-width:360px){.logo{width:92px;height:92px;}h1{font-size:28px;}.qr a{width:160px;height:160px;}.nav a{font-size:14px;}}
 @media (max-height:700px){.logo{width:84px;height:84px;margin-top:8px;}h1{margin-top:12px;}.qr a{width:150px;height:150px;}}
 
+.cta{position:relative;display:flex;align-items:center;justify-content:center;min-height:48px;margin-top:14px;border-radius:999px;background:var(--amber);color:var(--pine);font-weight:700;font-size:15px;}
+.cta:hover,.cta:active{background:var(--amber-soft);}
+.foot{position:relative;margin:14px 0 0;font-size:12.5px;opacity:.75;}
+.foot a{text-decoration:underline;text-underline-offset:3px;}
 </style>
 </head>
 <body>
@@ -105,11 +109,9 @@ a:focus-visible{outline:3px solid var(--amber);outline-offset:3px;}
     <p class="qr-scan">Rehbere eklemek için taratın</p>
     <p class="qr-tap">ya da QR koda dokunarak kaydedin</p>
   </section>
+  <a class="cta" href="iletisim.html">Mesaj Gönder</a>
+  <p class="foot"><a href="gizlilik.html">Gizlilik</a></p>
 </main>
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
-}
-</script>
+<script src="app.js" defer></script>
 </body>
 </html>
