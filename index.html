@@ -106,10 +106,6 @@ a:focus-visible{outline:3px solid var(--amber);outline-offset:3px;}
     <p class="qr-tap">ya da QR koda dokunarak kaydedin</p>
   </section>
 </main>
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
-}
-</script>
+<script src="app.js" defer></script>
 </body>
 </html>
