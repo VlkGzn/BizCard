@@ -85,9 +85,9 @@ test('card pages link to the contact and privacy pages', () => {
   assert.match(read('en.html'), /<a href="privacy\.html">Privacy<\/a>/);
 });
 
-test('service worker caches every new file, skips /api/ and is bumped to v2', () => {
+test('service worker caches every new file, skips /api/ and is bumped to v3', () => {
   const sw = read('sw.js');
-  assert.match(sw, /const VERSION = 'bizcard-v2';/);
+  assert.match(sw, /const VERSION = 'bizcard-v3';/);
   for (const file of ['app.js', 'form.js', 'pages.css', 'iletisim.html', 'contact.html', 'gizlilik.html', 'privacy.html']) {
     assert.match(sw, new RegExp(`'${file.replace('.', '\\.')}'`), `sw.js caches ${file}`);
     assert.ok(fs.existsSync(path.join(root, file)), `${file} exists`);
@@ -120,4 +120,17 @@ test('consent and privacy texts name every recipient and log', () => {
 test('no .DS_Store file is tracked', () => {
   const tracked = require('node:child_process').execSync('git ls-files', { cwd: root, encoding: 'utf8' });
   assert.ok(!/\.DS_Store/.test(tracked), 'a .DS_Store file is tracked');
+});
+
+test('canonical, hreflang and og URLs point to the Vercel address', () => {
+  const base = 'https://volkan-gozen-bizcard.vercel.app';
+  for (const [file, self, img] of [['index.html', '/', 'og-image.png'], ['en.html', '/en.html', 'og-image-en.png']]) {
+    const html = read(file);
+    assert.ok(html.includes(`<link rel="canonical" href="${base}${self}">`), file);
+    assert.ok(html.includes(`<link rel="alternate" hreflang="tr" href="${base}/">`), file);
+    assert.ok(html.includes(`<link rel="alternate" hreflang="en" href="${base}/en.html">`), file);
+    assert.ok(html.includes(`<meta property="og:url" content="${base}${self}">`), file);
+    assert.ok(html.includes(`<meta property="og:image" content="${base}/${img}">`), file);
+    assert.doesNotMatch(html, /vlkgzn\.github\.io\/BizCard/, file);
+  }
 });
