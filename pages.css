@@ -1,0 +1,41 @@
+/* BizCard alt sayfaları (iletişim, gizlilik) — ana kartın renkleri, gömülü font yok. */
+:root{
+  --ink:#1F2E24;--ink-soft:#4B5D50;--paper:#F6F1E6;--line:#D8CBAA;
+  --pine:#233D2C;--amber:#C17817;--amber-soft:#F0DAB8;--white:#FFFDF8;
+  --ok:#2F6B3A;--err:#A3361F;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;min-height:100vh;min-height:100dvh;background:var(--paper);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.55;
+  display:flex;justify-content:center;padding:20px 16px calc(20px + env(safe-area-inset-bottom));-webkit-font-smoothing:antialiased;}
+a{color:var(--pine);}
+.page{position:relative;width:100%;max-width:560px;background:var(--white);border:1px solid var(--line);border-radius:24px;padding:24px 20px 28px;}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.back{display:inline-flex;align-items:center;min-height:40px;font-weight:600;text-decoration:none;}
+.lang{display:inline-flex;padding:3px;border-radius:999px;background:var(--paper);border:1px solid var(--line);}
+.lang a{display:inline-flex;align-items:center;justify-content:center;min-width:40px;min-height:30px;padding:0 10px;border-radius:999px;
+  font-size:12px;font-weight:700;letter-spacing:.06em;text-decoration:none;color:var(--ink-soft);}
+.lang a[aria-current="page"]{background:var(--amber);color:var(--pine);}
+h1{font-family:Georgia,'Times New Roman',serif;font-size:28px;line-height:1.2;color:var(--pine);margin:18px 0 6px;}
+h2{font-family:Georgia,'Times New Roman',serif;font-size:19px;color:var(--pine);margin:26px 0 6px;}
+.lead{color:var(--ink-soft);margin:0 0 18px;}
+.prose p,.prose li{margin:0 0 10px;}
+.prose ul{padding-left:20px;margin:0 0 10px;}
+.meta{font-size:13px;color:var(--ink-soft);margin-top:28px;}
+.field{display:block;margin:0 0 16px;}
+.field span{display:block;font-weight:600;margin-bottom:6px;}
+.field input,.field textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;}
+.field textarea{min-height:140px;resize:vertical;}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-soft);}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:4px 0 20px;}
+.check input{width:20px;height:20px;margin:2px 0 0;flex:none;accent-color:var(--pine);}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;border:0;border-radius:999px;
+  background:var(--pine);color:var(--white);font:inherit;font-weight:700;font-size:16px;cursor:pointer;}
+.btn:hover{background:var(--amber);color:var(--pine);}
+.btn:disabled{opacity:.6;cursor:wait;}
+.status{min-height:24px;margin:14px 0 0;font-weight:600;}
+.status[data-kind="success"]{color:var(--ok);}
+.status[data-kind="error"]{color:var(--err);}
+a:focus-visible,.btn:focus-visible{outline:3px solid var(--amber);outline-offset:3px;}

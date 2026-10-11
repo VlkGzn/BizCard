@@ -42,3 +42,15 @@ test('every HTML page loads app.js', () => {
     assert.match(read(file), /<script src="app\.js" defer><\/script>/, file);
   }
 });
+
+test('privacy pages exist, cross-link and name the controller and processors', () => {
+  for (const [file, other] of [['gizlilik.html', 'privacy.html'], ['privacy.html', 'gizlilik.html']]) {
+    const html = read(file);
+    assert.match(html, new RegExp(`href="${other}"`), `${file} links to ${other}`);
+    assert.match(html, /Volkan Gözen/);
+    assert.match(html, /vgozen44@gmail\.com/);
+    assert.match(html, /Vercel/);
+    assert.match(html, /Resend/);
+    assert.match(html, /<link rel="stylesheet" href="pages\.css">/);
+  }
+});
