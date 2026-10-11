@@ -23,7 +23,7 @@
 - Yeni sayfalar font gömmez; gövde sistem fontu, başlıklar `Georgia, serif`.
 - Loglara mesaj içeriği ve e-posta adresi yazılmaz. IP e-postaya yazılmaz.
 - Statik dosyada değişiklik olursa `sw.js` içindeki `VERSION` artırılır (bu planda `bizcard-v2`).
-- Testler: `node --test test/` (proje kökünden).
+- Testler: `node --test test/*.test.js` (proje kökünden).
 
 ## Review Focus
 
@@ -144,7 +144,7 @@ test('validate returns messages in the requested language', () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: FAIL with `Cannot find module '../api/_lib/contact'`
 
 - [ ] **Step 3: Write the implementation**
@@ -231,7 +231,7 @@ module.exports = { MESSAGES, createRateLimiter, validate };
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: PASS, 9 tests
 
 - [ ] **Step 5: Commit**
@@ -396,7 +396,7 @@ test('buildEmail makes a one-line subject and a plain text body without IP', () 
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: FAIL with `handleContact is not a function`
 
 - [ ] **Step 3: Write the implementation** (in `api/_lib/contact.js`, above `module.exports`; then replace the export line)
@@ -472,7 +472,7 @@ Delete the old line `module.exports = { MESSAGES, createRateLimiter, validate };
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: PASS, 22 tests
 
 - [ ] **Step 5: Commit**
@@ -561,7 +561,7 @@ test('vercel handler maps request and response', async () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: FAIL with `Cannot find module '../api/_lib/resend'`
 
 - [ ] **Step 3: Write the implementation**
@@ -662,7 +662,7 @@ GUVENLIK-KONTROL-LISTESI.md
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: PASS, 26 tests
 
 - [ ] **Step 5: Check no secret is tracked**
@@ -741,7 +741,7 @@ test('every HTML page loads app.js', () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: FAIL with `ENOENT ... vercel.json` and `index.html has an inline <script>`
 
 - [ ] **Step 3: Create `app.js`**
@@ -795,7 +795,7 @@ with:
 
 - [ ] **Step 6: Run tests to verify they pass**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: PASS, 29 tests
 
 - [ ] **Step 7: Check the card still renders**
@@ -839,7 +839,7 @@ test('privacy pages exist, cross-link and name the controller and processors', (
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: FAIL with `ENOENT ... gizlilik.html`
 
 - [ ] **Step 3: Create `pages.css`**
@@ -1030,7 +1030,7 @@ a:focus-visible,.btn:focus-visible{outline:3px solid var(--amber);outline-offset
 
 - [ ] **Step 6: Run tests to verify they pass**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: PASS, 30 tests
 
 - [ ] **Step 7: Check at phone width**
@@ -1086,7 +1086,7 @@ test('form.js uses the absolute API only on GitHub Pages', () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: FAIL with `ENOENT ... iletisim.html`
 
 - [ ] **Step 3: Create `form.js`**
@@ -1269,7 +1269,7 @@ Not: `novalidate` tarayıcının kendi balonlarını kapatmaz çünkü `form.js`
 
 - [ ] **Step 6: Run tests to verify they pass**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: PASS, 32 tests
 
 - [ ] **Step 7: Manual browser check (no API yet)**
@@ -1324,7 +1324,7 @@ test('service worker caches every new file, skips /api/ and is bumped to v2', ()
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: FAIL on both new tests
 
 - [ ] **Step 3: Add the CSS to both card pages**
@@ -1413,7 +1413,7 @@ Add a row for each new file to the "Dosyalar" table:
 | `app.js`, `form.js` | Service worker kaydı ve form gönderimi |
 | `api/contact.js`, `api/_lib/` | Vercel'de çalışan form sunucusu (Resend ile e-posta) |
 | `vercel.json` | Güvenlik başlıkları |
-| `test/` | Testler: `node --test test/` |
+| `test/` | Testler: `node --test test/*.test.js` |
 ```
 
 Append this section at the end:
@@ -1435,7 +1435,7 @@ Yerel deneme için `.env.example` dosyasını `.env.local` olarak kopyalayın (c
 
 - [ ] **Step 7: Run tests to verify they pass**
 
-Run: `node --test test/`
+Run: `node --test test/*.test.js`
 Expected: PASS, 34 tests
 
 - [ ] **Step 8: Check the card at phone width**
@@ -1486,7 +1486,7 @@ Expected: "Teşekkürler…" görünür; Gmail'e "BizCard mesajı: …" konulu i
 git checkout main
 git pull --ff-only
 git merge --ff-only iletisim-formu
-node --test test/
+node --test test/*.test.js
 git push origin main
 ```
 
