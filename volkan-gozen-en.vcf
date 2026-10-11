@@ -9,12 +9,14 @@ TITLE;CHARSET=UTF-8:Agricultural Engineer · Vegetable Breeder · Data Anal
 TEL;TYPE=CELL,VOICE:+905327389673
 EMAIL;TYPE=INTERNET,WORK:volkan.gozen@tarimorman.gov.tr
 EMAIL;TYPE=INTERNET,HOME:vgozen44@gmail.com
-item1.URL:https://vlkgzn.github.io/dijital-kartvizit/en.html
-item1.X-ABLabel:Digital Business Card
-item2.URL:https://www.linkedin.com/in/volkan-gozen
-item2.X-ABLabel:LinkedIn
-item3.URL:https://wa.me/905327389673
-item3.X-ABLabel:WhatsApp
+item1.URL:https://www.volkangozen.com/en.html
+item1.X-ABLabel:Website
+item2.URL:https://vlkgzn.github.io/dijital-kartvizit/en.html
+item2.X-ABLabel:Digital Business Card
+item3.URL:https://www.linkedin.com/in/volkan-gozen
+item3.X-ABLabel:LinkedIn
+item4.URL:https://wa.me/905327389673
+item4.X-ABLabel:WhatsApp
 X-SOCIALPROFILE;TYPE=whatsapp:https://wa.me/905327389673
 X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/volkan-gozen
 ADR;CHARSET=UTF-8;TYPE=WORK:;;;Antalya;;;Türkiye
