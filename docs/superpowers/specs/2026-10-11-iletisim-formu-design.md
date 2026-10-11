@@ -73,8 +73,10 @@ Davranış:
 
 - Gönderim `form.js` ile `fetch` (JSON `POST`) yapılır. Tarayıcı tarafı
   doğrulama yalnızca kullanıcı kolaylığı içindir; asıl kontrol sunucudadır.
-- Gönderim adresi mutlak: `https://volkan-gozen-bizcard.vercel.app/api/contact`.
-  Böylece form GitHub Pages'te (ve oradan kurulu PWA'da) da çalışır.
+- Gönderim adresi: sayfa `*.vercel.app` üzerindeyse aynı origin `/api/contact`
+  (Production ve Preview kendi API'sini kullanır); `vlkgzn.github.io` üzerindeyse
+  mutlak `https://volkan-gozen-bizcard.vercel.app/api/contact`. Böylece form
+  GitHub Pages'te (ve oradan kurulu PWA'da) da çalışır.
 - Durumlar: gönderiliyor (düğme kilitli), başarılı ("Teşekkürler, mesajınız
   ulaştı."), hata (sunucunun döndürdüğü kısa mesaj), çevrimdışı ("İnternet
   bağlantısı yok, sonra tekrar deneyin.").
@@ -90,8 +92,9 @@ Akış:
 
 1. Yalnızca `POST` ve `OPTIONS` kabul edilir; diğerleri `405`.
 2. CORS: yalnızca `https://vlkgzn.github.io` ve
-   `https://volkan-gozen-bizcard.vercel.app` origin'lerine izin verilir.
-   Başka origin → `403`.
+   `https://volkan-gozen-bizcard.vercel.app` origin'lerine ve aynı origin
+   isteklere (Origin, isteğin `Host` değeriyle aynıysa; Preview adresleri için)
+   izin verilir. Başka origin → `403`.
 3. Rate limit: IP başına dakikada 5 istek (bellek içi). Aşımda `429` +
    `Retry-After`. Not: serverless örnek başına çalışır; kişisel kartvizit
    trafiği için yeterli.
@@ -115,6 +118,16 @@ Ortam değişkenleri (Vercel → Settings → Environment Variables):
 | --- | --- |
 | `RESEND_API_KEY` | Resend panelinden alınan anahtar |
 | `CONTACT_TO` | `vgozen44@gmail.com` |
+
+Her iki değişken **Production ve Preview** ortamlarına aynı değerle eklenir.
+Ayrı değer gerekmez: tek alıcı, kişisel site. Preview'a eklemek, dalı
+canlıya almadan deneme adresinde test etmeyi sağlar.
+
+Yerel geliştirme:
+
+- `.env.local` (gerçek değerler, `npx vercel env pull` ile de alınabilir)
+  commit edilmez; `.gitignore` içine `.env*` ve `!.env.example` eklenir.
+- `.env.example` commit edilir; değişken adlarını boş değerle gösterir.
 
 Not: Resend ücretsiz planda `onboarding@resend.dev` göndericisiyle yalnızca
 hesap sahibinin e-postasına gönderim yapılabilir. Resend hesabı
@@ -174,7 +187,15 @@ kısıt).
 - Yerel: `npx vercel dev` ile form uçtan uca denenir (gerçek anahtarla).
 - Canlı: Vercel ve GitHub Pages adreslerinden birer mesaj gönderilir, Gmail'e
   geldiği ve "Yanıtla"nın ziyaretçiye gittiği kontrol edilir.
+- Canlı kötüye kullanım testleri:
+  - 6 istek arka arkaya → 6.'sı `429` ve `Retry-After` başlığı
+  - Geçersiz e-posta → `400` ve alan hatası
+  - Rıza kutusu işaretsiz → `400`
+  - `GET /api/contact` → `405`
+  - Başka origin'den istek → `403`
 - Başlıklar: `curl -sI https://volkan-gozen-bizcard.vercel.app/` ile kontrol.
+- Git geçmişinde secret yok: `git log -p --all | grep -iE 're_[A-Za-z0-9]|api[_-]?key'`
+  boş dönmeli.
 - Telefonda PWA: form açılır ve gönderilir.
 
 ## Kullanıcının yapacakları
